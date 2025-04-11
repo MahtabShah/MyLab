@@ -18,7 +18,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     padding: 20px;
-    width: 350px;
+    width: 400px;
 }
 
 .display {
@@ -27,12 +27,18 @@ body {
     border-radius: 5px;
     margin-bottom: 20px;
     text-align: right;
-    min-height: 100px;
+    height: 100px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.display::-webkit-scrollbar {
+  width: 0px;
 }
 
 .previous-operand {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 1.2rem;
+    font-size: 0.8rem;
     margin-bottom: 5px;
 }
 
