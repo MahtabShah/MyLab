@@ -19,13 +19,23 @@ class Calculator {
     appendNumber(number) {
         if (number === '.' && this.currentOperand.includes('.')) return;
         this.currentOperand = this.currentOperand.toString() + number.toString();
+        this.previousOperand = this.currentOperand;
         this.updateDisplay();
+        // 
+        document.querySelector(".current-operand").scrollTop = document.querySelector(".current-operand").getClientRects()[0].bottom;
+        document.querySelector(".previous-operand").scrollTop = document.querySelector(".previous-operand").getClientRects()[0].bottom;
     }
 
     appendOperation(operation) {
         if (this.currentOperand === '') return;
         this.currentOperand += operation;
+        this.previousOperand = this.currentOperand;
         this.updateDisplay();
+    }
+
+    updateDisplay() {
+        this.currentOperandElement.innerText = this.currentOperand;
+        this.previousOperandElement.innerText = this.previousOperand;
     }
 
     sin() {
@@ -91,11 +101,6 @@ class Calculator {
             this.currentOperand = 'Error';
             this.updateDisplay();
         }
-    }
-
-    updateDisplay() {
-        this.currentOperandElement.innerText = this.currentOperand;
-        this.previousOperandElement.innerText = this.previousOperand;
     }
 }
 
