@@ -1,0 +1,9 @@
+:root{
+    --p-clmp: clamp(0.2rem, calc(1dvh + 1vh + 1% + 0.2rem), 4rem);
+    --t-clmp: clamp(0.6rem, calc(1dvh + 1vw + 1% + 0.2rem), 1.2rem);
+    --t-b-clr: #333;4
+    --t-w-clr: #ddd;
+}
+
+
+/* use three media queries 1200 , 800, 600 */
