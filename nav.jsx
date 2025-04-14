@@ -116,7 +116,49 @@ const Navbar = () => {
 export default Navbar;
 
 
+/* this is html file and css file already uploded
+ <header>
+      <nav class="navbar">
+        <div class="logo">
+          <a href="#">Logo</a>
+        </div>
+        <ul class="nav-links visible_section">
+          <li>
+            <a href="#" class="active"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-info-circle"></i> About</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-briefcase"></i> Services</a>
+          </li>
+          <li>
+            <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+          </li>
 
+          <li>
+            <a href="#"><i class="fas fa-envelope"></i> option</a>
+          </li>
+
+          <li>
+            <a href="#"><i class="fas fa-envelope"></i> option 1</a>
+          </li>
+
+          <li>
+            <a href="#"><i class="fas fa-envelope"></i> product</a>
+          </li>
+        </ul>
+
+        <div class="hamburger">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+
+      <div class="invisible_section"></div>
+    </header>
+*/
 
 /* this is working transform it into jsx a letter
  <script>
