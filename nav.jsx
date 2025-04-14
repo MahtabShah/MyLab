@@ -114,3 +114,118 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
+/* this is working transform it into jsx a letter
+ <script>
+      const hamburger = document.querySelector(".hamburger");
+      const invisibleSection = document.querySelector(".invisible_section");
+
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("active");
+        invisibleSection.classList.toggle("show-option");
+        for (let i = 0; i < 7; i++) {
+          fn();
+        }
+      });
+
+      document.querySelectorAll(".nav-links a").forEach((n) =>
+        n.addEventListener("click", () => {
+          hamburger.classList.remove("active");
+          // navLinks.classList.remove("active");
+        })
+      );
+
+      let invisible_section = document.querySelector(".invisible_section");
+      let visible_section = document.querySelector(".visible_section");
+
+      window.addEventListener("resize", fn);
+      fn();
+
+      function fn() {
+        next_move();
+        back_moove();
+      }
+
+      function next_move() {
+        let info_wds = current_information_wd();
+        const gap = info_wds[0] || 0;
+        const parentWidth = info_wds[1];
+        const totalPadding = info_wds[2];
+        let totleWidth = 0;
+        let items = document.querySelectorAll(".nav-links li");
+
+        items.forEach((item) => {
+          totleWidth += item.getBoundingClientRect().width + gap;
+          if (totleWidth + totalPadding - gap >= parentWidth) {
+            go_invisible();
+          }
+        });
+      }
+
+      function back_moove() {
+        if (invisible_section.children.length > 0) {
+          let info_wds = current_information_wd();
+          const gap = info_wds[0] || 0;
+          const parentWidth = info_wds[1];
+          const totalPadding = info_wds[2];
+          const safe = 20;
+          let items = document.querySelectorAll(".nav-links li");
+
+          let totleWidth =
+            gap +
+            safe +
+            invisible_section.lastElementChild.getBoundingClientRect().width;
+          items.forEach((item) => {
+            totleWidth += item.getBoundingClientRect().width + gap;
+          });
+
+          if (totleWidth + totalPadding < parentWidth) {
+            go_visible();
+          }
+        }
+      }
+
+      function current_information_wd() {
+        const parent = document.querySelector(".nav-links");
+        const parentStyle = window.getComputedStyle(parent);
+        const paddingRight = parseInt(parentStyle.paddingRight) || 0;
+        const paddingLeft = parseInt(parentStyle.paddingLeft) || 0;
+        const totalPadding = paddingLeft + paddingRight;
+        const gap = parseInt(parentStyle.gap) || 0;
+        const parentWidth = parent.getBoundingClientRect().width;
+
+        return [gap, parentWidth, totalPadding];
+      }
+
+      function go_invisible() {
+        if (visible_section.childElementCount) {
+          const last_child = visible_section.lastElementChild;
+          invisible_section.prepend(last_child);
+        }
+      }
+
+      function go_visible() {
+        if (invisible_section.childElementCount) {
+          const last_child = invisible_section.firstElementChild;
+          visible_section.append(last_child);
+        }
+      }
+    </script>
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
