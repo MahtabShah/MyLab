@@ -189,6 +189,13 @@ export default Navbar;
       function fn() {
         next_move();
         back_moove();
+         if (invisible_section.children.length == 0) {
+          hamburger.classList.add("d-none");
+        } else {
+          if (hamburger.classList.contains("d-none")) {
+            hamburger.classList.remove("d-none");
+          }
+        }
       }
 
       function next_move() {
