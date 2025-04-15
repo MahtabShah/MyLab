@@ -191,6 +191,9 @@ export default Navbar;
         back_moove();
          if (invisible_section.children.length == 0) {
           hamburger.classList.add("d-none");
+              if (invisibleSection.classList.contains("show-option")) {
+            invisibleSection.classList.toggle("show-option");
+          }
         } else {
           if (hamburger.classList.contains("d-none")) {
             hamburger.classList.remove("d-none");
