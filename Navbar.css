@@ -113,3 +113,9 @@
         display: flex;
         transform: translateX(0%);
       }
+
+
+
+  .d-none {
+        display: none;
+      }
