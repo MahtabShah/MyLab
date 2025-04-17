@@ -183,7 +183,9 @@ export default Navbar;
       let invisible_section = document.querySelector(".invisible_section");
       let visible_section = document.querySelector(".visible_section");
 
-      window.addEventListener("resize", fn);
+      ["resize", "load", "beforeunload", "unload", "focus"].forEach((event) =>
+        window.addEventListener(event, fn)
+      );
       fn();
 
       function fn() {
