@@ -116,6 +116,6 @@
 
 
 
-  .d-none {
-        display: none;
+ .op-none {
+        opacity: 0;
       }
