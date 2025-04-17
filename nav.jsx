@@ -187,20 +187,22 @@ export default Navbar;
       fn();
 
       function fn() {
-        next_move();
-        back_moove();
-         if (invisible_section.children.length == 0) {
-          hamburger.classList.add("d-none");
-              if (invisibleSection.classList.contains("show-option")) {
+        if (invisible_section.children.length == 0) {
+          hamburger.classList.add("op-none");
+          if (invisibleSection.classList.contains("show-option")) {
             invisibleSection.classList.toggle("show-option");
           }
         } else {
-          if (hamburger.classList.contains("d-none")) {
-            hamburger.classList.remove("d-none");
+          if (hamburger.classList.contains("op-none")) {
+            hamburger.classList.remove("op-none");
           }
         }
+
+        next_move();
+        back_moove();
       }
 
+      
       function next_move() {
         let info_wds = current_information_wd();
         const gap = info_wds[0] || 0;
