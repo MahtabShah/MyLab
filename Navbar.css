@@ -1,4 +1,4 @@
-      * {
+  * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -42,6 +42,10 @@
         /* display: none; */
         /* flex-grow: 1; */
         /* border: 2px solid red; */
+        /* min-width: 80px; */
+        min-width: max-content;
+        /* display: flex; */
+        /* justify-content: center; */
       }
 
       header a {
@@ -95,7 +99,7 @@
       }
 
       .invisible_section {
-        display: none;
+        /* display: none; */
         margin-top: 80px;
         list-style: none;
         gap: 20px;
@@ -104,18 +108,17 @@
         background: linear-gradient(0deg, #2980b9, #4676a6);
         /* border: 2px solid red; */
         padding: 20px;
-        transition: all 0.4s ease-in-out;
+        transition: all 0.1s ease-in-out;
         transform: translateX(-100%);
         flex-direction: column;
+        width: 140px;
+        display: flex;
       }
 
       .show-option {
-        display: flex;
         transform: translateX(0%);
       }
 
-
-
- .op-none {
+      .op-none {
         opacity: 0;
       }
