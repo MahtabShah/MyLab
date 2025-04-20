@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import "./Navbar.css"
 
 const Navbar = () => {
   const hamburger = useRef(null);
