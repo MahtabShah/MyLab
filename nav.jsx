@@ -1,119 +1,187 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./Navbar.css"; // Move the CSS into a separate file
+import { useRef, useEffect } from "react";
 
 const Navbar = () => {
-  const [menuActive, setMenuActive] = useState(false);
-  const navRef = useRef(null);
-
-  const toggleHamburger = () => {
-    setMenuActive(!menuActive);
-  };
-
-  const closeMenu = () => {
-    setMenuActive(false);
-  };
-
-  const manageItem = (item, key) => {
-    const parent = navRef.current;
-    const parentStyle = window.getComputedStyle(parent);
-    const gap = parseInt(parentStyle.gap) || 0;
-    const paddingLeft = parseInt(parentStyle.paddingLeft) || 0;
-    const paddingRight = parseInt(parentStyle.paddingRight) || 0;
-    const totalPadding = paddingLeft + paddingRight;
-    const parentWidth = parent.getBoundingClientRect().width;
-    const items = Array.from(parent.querySelectorAll(".a"));
-    const safe = 40;
-
-    let totalWidth =
-      totalPadding + item.getBoundingClientRect().width + gap + safe;
-
-    items.forEach((i) => {
-      totalWidth += i.getBoundingClientRect().width;
-    });
-
-    if (parentWidth > totalWidth && key === "add") {
-      item.classList.add("a");
-    }
-
-    if (parentWidth < totalWidth && key === "del") {
-      item.classList.remove("a");
-    }
-  };
+  const hamburger = useRef(null);
+  const invisible_section = useRef(null);
+  const visible_section = useRef(null);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const parent = navRef.current;
-      if (!parent) return;
-      const items = parent.querySelectorAll("li");
+    const fn = () => {
+      const ham = hamburger.current;
+      const invisible = invisible_section.current;
+
+      if (invisible.children.length === 0) {
+        ham.classList.add("op-none");
+
+        if (ham.classList.contains("active")) {
+          ham.classList.remove("active");
+        }
+        if (invisible.classList.contains("show-option")) {
+          invisible.classList.remove("show-option");
+        }
+      } else {
+        if (ham.classList.contains("op-none")) {
+          ham.classList.remove("op-none");
+        }
+      }
+      next_move();
+      back_moove();
+    };
+
+    const next_move = () => {
+      const info = current_information_wd();
+      const gap = info[0] || 0;
+      const parentWidth = info[1];
+      const totalPadding = info[2];
+      let totalWidth = 0;
+      const items = document.querySelectorAll(".nav-links li");
 
       items.forEach((item) => {
-        manageItem(item, "add");
-        manageItem(item, "del");
+        totalWidth += item.getBoundingClientRect().width + gap;
+        if (totalWidth + totalPadding - gap >= parentWidth) {
+          go_invisible();
+        }
       });
-    }, 10);
+    };
 
-    return () => clearInterval(interval);
+    const back_moove = () => {
+      if (invisible_section.current.children.length > 0) {
+        const info = current_information_wd();
+        const gap = info[0] || 0;
+        const parentWidth = info[1];
+        const totalPadding = info[2];
+        const safe = 20;
+        const items = document.querySelectorAll(".nav-links li");
+
+        let totalWidth =
+          gap +
+          safe +
+          invisible_section.current.lastElementChild.getBoundingClientRect()
+            .width;
+        items.forEach((item) => {
+          totalWidth += item.getBoundingClientRect().width + gap;
+        });
+
+        if (totalWidth + totalPadding < parentWidth) {
+          go_visible();
+        }
+      }
+    };
+
+    const current_information_wd = () => {
+      const parent = document.querySelector(".nav-links");
+      const style = window.getComputedStyle(parent);
+      const gap = parseInt(style.gap) || 0;
+      const paddingLeft = parseInt(style.paddingLeft) || 0;
+      const paddingRight = parseInt(style.paddingRight) || 0;
+      const parentWidth = parent.getBoundingClientRect().width;
+
+      return [gap, parentWidth, paddingLeft + paddingRight];
+    };
+
+    const go_invisible = () => {
+      if (visible_section.current.childElementCount > 0) {
+        const last = visible_section.current.lastElementChild;
+        invisible_section.current.prepend(last);
+      }
+    };
+
+    const go_visible = () => {
+      if (invisible_section.current.childElementCount > 0) {
+        const first = invisible_section.current.firstElementChild;
+        visible_section.current.append(first);
+      }
+    };
+
+    const handleResizeEvents = () => {
+      for (let i = 0; i < 7; i++) {
+        fn();
+      }
+    };
+
+    const windowEvents = [
+      "resize",
+      "load",
+      "orientationchange",
+      "beforeunload",
+      "unload",
+      "focus",
+    ];
+
+    windowEvents.forEach((event) =>
+      window.addEventListener(event, handleResizeEvents)
+    );
+
+    // Setup nav link click handler
+    const links = document.querySelectorAll(".nav-links a");
+    links.forEach((link) =>
+      link.addEventListener("click", () => {
+        hamburger.current.classList.remove("active");
+        invisible_section.current.classList.remove("show-option");
+      })
+    );
+
+    return () => {
+      windowEvents.forEach((event) =>
+        window.removeEventListener(event, handleResizeEvents)
+      );
+    };
   }, []);
 
+  const hamburgerClick = () => {
+    hamburger.current.classList.toggle("active");
+    invisible_section.current.classList.toggle("show-option");
+
+    for (let i = 0; i < 7; i++) {
+      // call inner function
+    }
+  };
+
   return (
-    <nav className="navbar">
-      <div className="logo">
-        <a href="#">Logo</a>
-      </div>
-      <ul
-        className={`nav-links ${menuActive ? "active" : ""}`}
-        ref={navRef}
-        onClick={closeMenu}
-      >
-        <li>
-          <a href="#" className="active">
-            <i className="fas fa-home"></i> Home
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-info-circle"></i> About
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-briefcase"></i> Services
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-envelope"></i> Contact
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-envelope"></i> Option
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-envelope"></i> Option 1
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i className="fas fa-envelope"></i> Product
-          </a>
-        </li>
-      </ul>
-      <div
-        className={`hamburger ${menuActive ? "active" : ""}`}
-        onClick={toggleHamburger}
-      >
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </div>
-    </nav>
+    <>
+      <header>
+        <nav className="navbar">
+          <div className="logo">
+            <a href="#">Logo</a>
+          </div>
+          <ul className="nav-links visible_section" ref={visible_section}>
+            <li>
+              <a href="#" className="active">
+                <i className="fas fa-home"></i> Home
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fas fa-info-circle"></i> About
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fas fa-briefcase"></i> Services
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i className="fas fa-envelope"></i> Contact
+              </a>
+            </li>
+          </ul>
+
+          <div className="hamburger" onClick={hamburgerClick} ref={hamburger}>
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </div>
+        </nav>
+
+        <div className="invisible_section" ref={invisible_section}></div>
+      </header>
+    </>
   );
 };
 
 export default Navbar;
+
 
 
 /* this is html file and css file already uploded
